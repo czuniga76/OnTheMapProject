@@ -14,6 +14,7 @@
 		E51FB5681C39E72F00C424EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E51FB5661C39E72F00C424EB /* LaunchScreen.storyboard */; };
 		E51FB5731C39E73000C424EB /* onMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB5721C39E73000C424EB /* onMapTests.swift */; };
 		E51FB57E1C39E73000C424EB /* onMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB57D1C39E73000C424EB /* onMapUITests.swift */; };
+		E51FB58D1C39EBB400C424EB /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB58C1C39EBB400C424EB /* StudentInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E51FB5791C39E73000C424EB /* onMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = onMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E51FB57D1C39E73000C424EB /* onMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onMapUITests.swift; sourceTree = "<group>"; };
 		E51FB57F1C39E73000C424EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E51FB58C1C39EBB400C424EB /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		E51FB55C1C39E72F00C424EB /* onMap */ = {
 			isa = PBXGroup;
 			children = (
+				E51FB58B1C39E7E100C424EB /* Model */,
 				E51FB55D1C39E72F00C424EB /* AppDelegate.swift */,
 				E51FB55F1C39E72F00C424EB /* ViewController.swift */,
 				E51FB5611C39E72F00C424EB /* Main.storyboard */,
@@ -123,6 +126,14 @@
 				E51FB57F1C39E73000C424EB /* Info.plist */,
 			);
 			path = onMapUITests;
+			sourceTree = "<group>";
+		};
+		E51FB58B1C39E7E100C424EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E51FB58C1C39EBB400C424EB /* StudentInformation.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 			files = (
 				E51FB5601C39E72F00C424EB /* ViewController.swift in Sources */,
 				E51FB55E1C39E72F00C424EB /* AppDelegate.swift in Sources */,
+				E51FB58D1C39EBB400C424EB /* StudentInformation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
