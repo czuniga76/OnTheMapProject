@@ -15,6 +15,9 @@
 		E51FB5731C39E73000C424EB /* onMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB5721C39E73000C424EB /* onMapTests.swift */; };
 		E51FB57E1C39E73000C424EB /* onMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB57D1C39E73000C424EB /* onMapUITests.swift */; };
 		E51FB58D1C39EBB400C424EB /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB58C1C39EBB400C424EB /* StudentInformation.swift */; };
+		E51FB58F1C3A122500C424EB /* OnMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB58E1C3A122500C424EB /* OnMapClient.swift */; };
+		E51FB5911C3A14AD00C424EB /* OnMapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB5901C3A14AD00C424EB /* OnMapConstants.swift */; };
+		E5CA602A1C55CBB9008085F7 /* OnMapConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CA60291C55CBB9008085F7 /* OnMapConvenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		E51FB57D1C39E73000C424EB /* onMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onMapUITests.swift; sourceTree = "<group>"; };
 		E51FB57F1C39E73000C424EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E51FB58C1C39EBB400C424EB /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		E51FB58E1C3A122500C424EB /* OnMapClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnMapClient.swift; sourceTree = "<group>"; };
+		E51FB5901C3A14AD00C424EB /* OnMapConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnMapConstants.swift; sourceTree = "<group>"; };
+		E5CA60291C55CBB9008085F7 /* OnMapConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnMapConvenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +138,9 @@
 			isa = PBXGroup;
 			children = (
 				E51FB58C1C39EBB400C424EB /* StudentInformation.swift */,
+				E51FB58E1C3A122500C424EB /* OnMapClient.swift */,
+				E5CA60291C55CBB9008085F7 /* OnMapConvenience.swift */,
+				E51FB5901C3A14AD00C424EB /* OnMapConstants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -268,8 +277,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E51FB5601C39E72F00C424EB /* ViewController.swift in Sources */,
+				E51FB5911C3A14AD00C424EB /* OnMapConstants.swift in Sources */,
 				E51FB55E1C39E72F00C424EB /* AppDelegate.swift in Sources */,
+				E51FB58F1C3A122500C424EB /* OnMapClient.swift in Sources */,
 				E51FB58D1C39EBB400C424EB /* StudentInformation.swift in Sources */,
+				E5CA602A1C55CBB9008085F7 /* OnMapConvenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +506,7 @@
 				E51FB5841C39E73000C424EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E51FB5851C39E73000C424EB /* Build configuration list for PBXNativeTarget "onMapTests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +515,7 @@
 				E51FB5871C39E73000C424EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E51FB5881C39E73000C424EB /* Build configuration list for PBXNativeTarget "onMapUITests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +524,7 @@
 				E51FB58A1C39E73000C424EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

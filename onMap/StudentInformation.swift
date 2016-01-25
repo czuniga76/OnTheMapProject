@@ -17,13 +17,5 @@ public struct StudentInformation{
     var longitude: CLLocationDegrees
     var mediaURL: String
     
- 
-    /*
-    public init(first: String, last: String , lat: CLLocationDegrees, long: CLLocationDegrees){
-        firstName = first
-        lastName = last
-        latitude = lat
-        longitude = long
-    }
-   */
+        
 }

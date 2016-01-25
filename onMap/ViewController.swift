@@ -18,10 +18,14 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     var studentRecords = [StudentInformation]()
     var annotations = [MKPointAnnotation]()
+    var student: StudentInformation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+     
+        
+        /*
         let Locations = hardCodedLocationData()
         
         for dictionary in Locations {
@@ -49,6 +53,56 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }
         
         self.mapView.addAnnotations(annotations)
+        */
+        
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        
+        onMapClient.sharedInstance().getParseLocationData { students, error in
+            if let students  = students {
+                
+                for student in students  {
+                    let annotation = MKPointAnnotation()
+                    
+                    // The lat and long are used to create a CLLocationCoordinates2D instance.
+                    let coordinate = CLLocationCoordinate2D(latitude: student.latitude, longitude: student.longitude)
+                    
+                    annotation.coordinate = coordinate
+                    annotation.title = "\(student.firstName) \(student.lastName)"
+                    annotation.subtitle = student.mediaURL
+                    
+                    // Finally we place the annotation in an array of annotations.
+                    self.annotations.append(annotation)
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    // update display
+                    self.mapView.addAnnotations(self.annotations)
+                    
+                }
+            }else {
+                //print(error, terminator: "")
+            }
+
+            
+        }
+    }
+        
+    let completionHandler = { (status_code: Int?, error: NSError?) -> Void in
+        if let err = error {
+            print(err, terminator: "")
+        } else {
+            if status_code == 1 || status_code == 12 {
+                // self.isFavorite = true
+                print("success")
+                dispatch_async(dispatch_get_main_queue()) {
+                    //self.toggleFavoriteButton.tintColor = nil
+                }
+            } else {
+                print("Unexpected status code \(status_code)", terminator: "")
+            }
+        }
     }
 
     
