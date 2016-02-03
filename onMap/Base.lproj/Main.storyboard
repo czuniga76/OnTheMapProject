@@ -19,15 +19,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vCe-cM-Xm8">
-                                <rect key="frame" x="128" y="258" width="46" height="30"/>
+                                <rect key="frame" x="128" y="367" width="46" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginUD:" destination="nhd-o3-uWh" eventType="touchUpInside" id="dCO-UX-H7Z"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="omk-ZQ-dqf">
+                                <rect key="frame" x="65" y="245" width="193" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s46-Sg-6xE">
+                                <rect key="frame" x="65" y="302" width="193" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="nameField" destination="omk-ZQ-dqf" id="SWw-Ui-T9L"/>
+                        <outlet property="passwordField" destination="s46-Sg-6xE" id="jdd-yy-mfE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nr-Gc-Du2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
