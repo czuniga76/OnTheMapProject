@@ -26,7 +26,7 @@ extension onMapClient {
         let parameters = [String: AnyObject] ()
                 
         taskForGETMethod(mutableMethod , baseURL: url, headers: headerDic, parameters: parameters) { JSONResult, error in
-            var studentRecords = [StudentInformation]()
+           // var studentRecords = [StudentInformation]()
             
             
             if let error = error {
@@ -60,9 +60,9 @@ extension onMapClient {
                    
                     
                     //print(student.firstName,student.lastName,student.mediaURL)
-                    studentRecords.append(student)
+                    onMapClient.sharedInstance().studentRecords.append(student)
                 }
-                completionHandler(result: studentRecords, error:nil)
+                completionHandler(result: onMapClient.sharedInstance().studentRecords, error:nil)
                 
                 
             }

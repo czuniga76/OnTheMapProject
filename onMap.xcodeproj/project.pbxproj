@@ -19,6 +19,7 @@
 		E51FB5911C3A14AD00C424EB /* OnMapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FB5901C3A14AD00C424EB /* OnMapConstants.swift */; };
 		E5CA602A1C55CBB9008085F7 /* OnMapConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CA60291C55CBB9008085F7 /* OnMapConvenience.swift */; };
 		E5CB2DCB1C6099C3005527FA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CB2DCA1C6099C3005527FA /* LoginViewController.swift */; };
+		E5CB2DCD1C670A9E005527FA /* MapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CB2DCC1C670A9E005527FA /* MapTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		E51FB5901C3A14AD00C424EB /* OnMapConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnMapConstants.swift; sourceTree = "<group>"; };
 		E5CA60291C55CBB9008085F7 /* OnMapConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnMapConvenience.swift; sourceTree = "<group>"; };
 		E5CB2DCA1C6099C3005527FA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E5CB2DCC1C670A9E005527FA /* MapTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				E51FB55D1C39E72F00C424EB /* AppDelegate.swift */,
 				E51FB55F1C39E72F00C424EB /* ViewController.swift */,
 				E5CB2DCA1C6099C3005527FA /* LoginViewController.swift */,
+				E5CB2DCC1C670A9E005527FA /* MapTableViewController.swift */,
 				E51FB5611C39E72F00C424EB /* Main.storyboard */,
 				E51FB5641C39E72F00C424EB /* Assets.xcassets */,
 				E51FB5661C39E72F00C424EB /* LaunchScreen.storyboard */,
@@ -283,6 +286,7 @@
 				E51FB5601C39E72F00C424EB /* ViewController.swift in Sources */,
 				E51FB5911C3A14AD00C424EB /* OnMapConstants.swift in Sources */,
 				E51FB55E1C39E72F00C424EB /* AppDelegate.swift in Sources */,
+				E5CB2DCD1C670A9E005527FA /* MapTableViewController.swift in Sources */,
 				E51FB58F1C3A122500C424EB /* OnMapClient.swift in Sources */,
 				E51FB58D1C39EBB400C424EB /* StudentInformation.swift in Sources */,
 				E5CA602A1C55CBB9008085F7 /* OnMapConvenience.swift in Sources */,

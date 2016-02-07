@@ -30,17 +30,18 @@ class LoginViewController: UIViewController {
         
         
         
-        var parameters = [String: AnyObject] ()
+        let parameters = [String: AnyObject] ()
         let task = onMapClient.sharedInstance().taskForPOSTMethod(mutableMethod, parameters: parameters, jsonBody: body) { JSONResult, error in
             
             if let error = error {
                 //self.completionHandler(nil, error)
                 print("error")
+                //TODO insert alert with error
             } else {
                 print("success")
                 dispatch_async(dispatch_get_main_queue()) {
                     
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ParseController") as! UIViewController
+                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
                     self.presentViewController(controller, animated: true, completion: nil)
                 }
                 

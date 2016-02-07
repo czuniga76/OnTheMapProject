@@ -13,6 +13,8 @@ import MapKit
 class onMapClient : NSObject {
     
     //var session: NSURLSession
+    var studentRecords = [StudentInformation]()
+    var annotations = [MKPointAnnotation]()
     
     override init() {
         //session = NSURLSession.sharedSession()
@@ -84,7 +86,7 @@ class onMapClient : NSObject {
     
     func taskForPOSTMethod(method:String, parameters: [String : AnyObject], jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        var mutableParameters = parameters
+        let mutableParameters = parameters
        // "https://www.udacity.com/api/"
        // let urlString = Constants.BaseURLSecure + method + onTheMapClient.escapedParameters(mutableParameters)
         let urlString = "https://www.udacity.com/api/" + method + onMapClient.escapedParameters(mutableParameters)
@@ -108,17 +110,9 @@ class onMapClient : NSObject {
             
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])
             
-            /*
-            request.HTTPBody = "{\"udacity\": {\"username\": \"christian.zuniga@hotmail.com\", \"password\": \"\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-            */
-            
-            /* use to check requestbody
-            let requestString = String(data: request.HTTPBody!, encoding:
-            NSUTF8StringEncoding)
-            print(requestString)
-            */
             
         } catch let error as NSError {
+            // error in forming request
             jsonifyError = error
             request.HTTPBody = nil
         }
