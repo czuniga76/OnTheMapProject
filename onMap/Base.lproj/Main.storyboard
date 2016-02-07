@@ -83,7 +83,7 @@
         <!--Item-->
         <scene sceneID="fln-Qd-ldX">
             <objects>
-                <tableViewController id="rzH-sN-01q" sceneMemberID="viewController">
+                <tableViewController id="rzH-sN-01q" customClass="MapTableViewController" customModule="onMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qwu-iS-MaA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
