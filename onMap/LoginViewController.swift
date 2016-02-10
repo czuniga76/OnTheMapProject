@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     
                     //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
-                    let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MapNavigationController") as! UINavigationController
+                    let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
                     
                     self.presentViewController(controller, animated: true, completion: nil)
                 }
