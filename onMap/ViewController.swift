@@ -34,10 +34,11 @@ class ViewController: UIViewController, MKMapViewDelegate {
     func getStudentLocations() {
         onMapClient.sharedInstance().getParseLocationData { students, error in
             if let students  = students {
+               
                 
                 for student in students  {
                     let annotation = MKPointAnnotation()
-                    
+                   
                     // The lat and long are used to create a CLLocationCoordinates2D instance.
                     let coordinate = CLLocationCoordinate2D(latitude: student.latitude, longitude: student.longitude)
                     
@@ -117,6 +118,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         let reuseId = "pin"
         
+        
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
@@ -124,7 +126,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
             pinView!.canShowCallout = true
             pinView!.pinColor = .Red
             // pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-            pinView!.rightCalloutAccessoryView = UIButton()
+            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            
             
         }
         else {
@@ -138,10 +141,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
             if let toOpen = view.annotation?.subtitle! {
                 app.openURL(NSURL(string: toOpen)!)
+            } else {
+                print("could not open broswer")
+                
             }
         }
     }

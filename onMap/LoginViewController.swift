@@ -9,14 +9,24 @@
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var nameField: UITextField!
+    
+    @IBAction func signUp(sender: UIButton) {
+        
+        if let url = NSURL(string: "https://www.udacity.com") {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
     
     @IBOutlet weak var passwordField: UITextField!
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.orangeColor()
+        nameField.clearsOnBeginEditing = true
+        passwordField.clearsOnBeginEditing = true
         
     }
     
@@ -37,10 +47,22 @@ class LoginViewController: UIViewController {
             
             if let error = error {
                 
-                print("error")
-                //TODO insert alert with error
+                                //TODO insert alert with error
+                dispatch_async(dispatch_get_main_queue()) {
+                    var errorMessage = "Failed with code"
+                    errorMessage = errorMessage + error.code.description
+                    
+                    let ac = UIAlertController(title: "", message: errorMessage, preferredStyle: .Alert)
+                    
+                    let acceptError = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    ac.addAction(acceptError)
+                    self.presentViewController(ac, animated: true,completion: nil)
+                    
+                    
+                }
+                
             } else {
-                print("success")
+                
                 dispatch_async(dispatch_get_main_queue()) {
                     
                     
@@ -58,31 +80,13 @@ class LoginViewController: UIViewController {
         }
         
         
-        /*
-        let parameters = [String: AnyObject] ()
-        let urlString = "https://www.udacity.com/api/" + method + onMapClient.escapedParameters(parameters)
-        
-        let task = onMapClient.sharedInstance().taskForPOSTMethod(urlString, parameters: parameters, jsonBody: body) { JSONResult, error in
-            
-            if let error = error {
-                //self.completionHandler(nil, error)
-                print("error")
-                //TODO insert alert with error
-            } else {
-                print("success")
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    
-                    let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
-                    
-                    self.presentViewController(controller, animated: true, completion: nil)
-                }
-                
-            }
-        }
-
-      */
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
+    
     
 }

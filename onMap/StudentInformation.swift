@@ -16,6 +16,7 @@ public struct StudentInformation{
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
     var mediaURL: String
+    var updatedLast: NSDate
     
         
 }

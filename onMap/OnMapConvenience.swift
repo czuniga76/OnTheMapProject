@@ -26,8 +26,7 @@ extension onMapClient {
         let parameters = [String: AnyObject] ()
                 
         taskForGETMethod(mutableMethod , baseURL: url, headers: headerDic, parameters: parameters) { JSONResult, error in
-           // var studentRecords = [StudentInformation]()
-            
+           
             
             if let error = error {
                 completionHandler(result:nil, error: error)
@@ -37,6 +36,8 @@ extension onMapClient {
                 let studentLocations = (JSONResult["results"] as! NSArray) as Array
                 
                 for  dictionary in studentLocations {
+                    
+                    
                     
                     
                     
@@ -51,17 +52,34 @@ extension onMapClient {
                     let first = dictionary["firstName"] as! String
                     let last = dictionary["lastName"] as! String
                     let mediaURL = dictionary["mediaURL"] as! String
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+                    
+                    
+                    let dateString = dictionary["updatedAt"] as! String
+                    var updated = NSDate()
+                    
+                    if let date = dateFormatter.dateFromString(dateString)
+                    {
+                        updated = date
+                    
+                        
+                    }
+                    
+                    
+                    let student = StudentInformation(firstName: first,lastName: last, latitude: lat, longitude: long, mediaURL: mediaURL,updatedLast: updated)
+                    
                 
-                    let student = StudentInformation(firstName: first,lastName: last, latitude: lat, longitude: long, mediaURL: mediaURL)
-                    
-                    
-                    
                     
                    
                     
-                    //print(student.firstName,student.lastName,student.mediaURL)
                     onMapClient.sharedInstance().studentRecords.append(student)
                 }
+                
+                // sort by most recent (found in stackoverflow questions)
+                
+                onMapClient.sharedInstance().studentRecords.sortInPlace({$0.updatedLast.compare($1.updatedLast) == .OrderedDescending })
+                
                 completionHandler(result: onMapClient.sharedInstance().studentRecords, error:nil)
                 
                 
@@ -110,7 +128,7 @@ extension onMapClient {
             
             if let error = error {
                 
-                print("error")
+                
                 //TODO make sure completionHandler handles error
                 // completionHandler(nil,error)
             } else {

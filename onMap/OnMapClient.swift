@@ -54,9 +54,7 @@ class onMapClient : NSObject {
                 
                 do {
                     parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! Dictionary<String,AnyObject>
-                    print(response)
                     
-                    //print(parsedResult)
                     
                     completionHandler(result: parsedResult, error: nil)
                 }
@@ -125,12 +123,12 @@ class onMapClient : NSObject {
             let newData = data!.subdataWithRange(NSMakeRange(offset, data!.length - offset))
             if let error = downloadError {
                 let newError = onMapClient.errorForData(newData, response: response, error: error)
-                print ("download error")
+                
                 completionHandler(result: nil, error: downloadError)
             } else {
                 
                 onMapClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
-                print("post worked")
+                
             }
         }
         
@@ -165,12 +163,6 @@ class onMapClient : NSObject {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! Dictionary<String,AnyObject>
             
             
-            //print(parsedResult)
-            /*
-            for (pkeys,pvalues) in parsedResult {
-            print(pkeys,pvalues)
-            }
-            */
             
             
         } catch let error as NSError {
@@ -179,7 +171,7 @@ class onMapClient : NSObject {
         }
         
         if let error = parsingError {
-            print("parsing error in json serialization")
+            //print("parsing error in json serialization")
             completionHandler(result: nil, error: error)
         } else {
             completionHandler(result: parsedResult, error: nil)

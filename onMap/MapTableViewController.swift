@@ -37,7 +37,7 @@ class MapTableViewController: UITableViewController {
     func getStudentData() {
         onMapClient.sharedInstance().getParseLocationData { students, error in
             if let students  = students {
-                //print("succes")
+                
                 dispatch_async(dispatch_get_main_queue()) {
                     
                     self.tableView.reloadData()
@@ -65,10 +65,34 @@ class MapTableViewController: UITableViewController {
         name.appendContentsOf(student.lastName)
         
         cell.textLabel?.text = name
+        cell.detailTextLabel?.text = student.mediaURL
         
         
         
         return cell
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let indexPath = tableView.indexPathForSelectedRow!
+        let cell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
+
+        
+        if let url = NSURL(string:(cell.detailTextLabel?.text)!) {
+            
+            UIApplication.sharedApplication().openURL(url)
+        } else {
+            let errorMessage = "Invalid URL"
+           
+            let ac = UIAlertController(title: "", message: errorMessage, preferredStyle: .Alert)
+            
+            let acceptError = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            ac.addAction(acceptError)
+            self.presentViewController(ac, animated: true,completion: nil)
+            
+        }
+        
         
     }
 
