@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class InfoPostingViewController: UIViewController, MKMapViewDelegate {
+class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var queryLabel: UILabel!
     @IBOutlet weak var linkLabel: UITextField!
  
@@ -97,11 +97,11 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate {
                 JSONResult, error in
                 
                 if let error = error {
-                    //print("error")
+                    
                     
                     dispatch_async(dispatch_get_main_queue()) {
-                        var errorMessage = "Failed with code"
-                        errorMessage = errorMessage + error.code.description
+                        var errorMessage = "Posting Failed \n"
+                        errorMessage = errorMessage + error.localizedDescription
                         
                         let ac = UIAlertController(title: "", message: errorMessage, preferredStyle: .Alert)
                         
@@ -113,8 +113,8 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate {
                     }
                     
                 } else {
-                    print("succes in posting to parse")
-                    print(JSONResult)
+                    
+                    
                     self.dismissViewControllerAnimated(true, completion: nil)
                     
                 }
@@ -140,6 +140,16 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
    
+    @IBAction func dismissKeyBoard(sender: UITapGestureRecognizer) {
+        locationTextView.resignFirstResponder()
+        
+    }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     
     override func viewDidLoad() {

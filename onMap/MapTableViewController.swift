@@ -14,25 +14,9 @@ class MapTableViewController: UITableViewController {
         getStudentData()
     }
     
-    /*
-    override func viewDidLoad() {
-                    
-        onMapClient.sharedInstance().getParseLocationData { students, error in
-            if let students  = students {
-                //print("succes")
-                dispatch_async(dispatch_get_main_queue()) {
-
-                    self.tableView.reloadData()
-                }
-            }
-            
-        
-        }
-        
-    }
-    */
+   
     
-    //TODO override viewWillAppear to update data in case it was updated from the other view.
+   
     
     func getStudentData() {
         onMapClient.sharedInstance().getParseLocationData { students, error in

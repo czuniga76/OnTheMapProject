@@ -22,9 +22,9 @@ class onMapClient : NSObject {
         
     }
     
-    func taskForGETMethod(method: String, baseURL: String, headers: [String: String] ,parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForGETMethod(method: String, baseURL: String, headers: [String: String] ,parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> Void {
         
-        var mutableParameters = parameters
+        
         
         let urlString = baseURL// + method
             
@@ -44,11 +44,11 @@ class onMapClient : NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, downloadError in
            
             if let error = downloadError {
-                    print("download error")
-                    completionHandler(result: nil, error: downloadError)
+                
+                    completionHandler(result: nil, error: error)
 
             } else {
-                // print(NSString(data: data, encoding: NSUTF8StringEncoding))
+                
                 var parsedResult = [String:AnyObject]()
                 var parsingError: NSError? = nil
                 
@@ -64,10 +64,10 @@ class onMapClient : NSObject {
                 }
                 
                 if let error = parsingError {
-                    print("parsing error in json serialization")
+                  
                     
                 } else {
-                    print("success in parse download")
+                    
                    
                 }
                 
@@ -77,12 +77,12 @@ class onMapClient : NSObject {
         task.resume()
         
 
-        return task
+        
     }
     
     
     
-    func taskForPOSTMethod(requestURL:String, headers: [String : String], jsonBody: [String:AnyObject], offset: Int, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(requestURL:String, headers: [String : String], jsonBody: [String:AnyObject], offset: Int, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> Void {
         
      
         
@@ -108,34 +108,40 @@ class onMapClient : NSObject {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])
             
             
+        
+        
+            /* 4. Make the request */
+            let session = NSURLSession.sharedSession()
+            let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+            
+            /* 5/6. Parse the data and use the data  */
+            
+                
+                if let error = downloadError {
+                   // let newError = onMapClient.errorForData(data, response: response, error: error)
+                
+                    completionHandler(result: nil, error: error)
+                
+                } else {
+                    let newData = data!.subdataWithRange(NSMakeRange(offset, data!.length - offset))
+                    onMapClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+                
+                }
+            }
+        
+            /* 7. Start the request */
+            task.resume()
+        
+           
+        
         } catch let error as NSError {
-            // error in forming request
+            // error in forming request body
             jsonifyError = error
             request.HTTPBody = nil
-        }
-        
-        /* 4. Make the request */
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+            completionHandler(result: nil, error: jsonifyError)
             
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
-            
-            let newData = data!.subdataWithRange(NSMakeRange(offset, data!.length - offset))
-            if let error = downloadError {
-                let newError = onMapClient.errorForData(newData, response: response, error: error)
-                
-                completionHandler(result: nil, error: downloadError)
-            } else {
-                
-                onMapClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
-                
-            }
         }
-        
-        /* 7. Start the request */
-        task.resume()
-        
-        return task
+
     }
 
     class func errorForData(data: NSData?, response: NSURLResponse?, error: NSError) -> NSError {
@@ -162,20 +168,32 @@ class onMapClient : NSObject {
         do {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! Dictionary<String,AnyObject>
             
+          
+            
+            
+            
+            
+            if let error = parsedResult["error"] {
+                // catch error in login
+                let userInfo: [NSObject : AnyObject] =
+                [
+                    NSLocalizedDescriptionKey :  NSLocalizedString("Invalid Credentials", value: "Invalid username or password", comment: ""),
+                    NSLocalizedFailureReasonErrorKey : NSLocalizedString("Invalid", value: "Invalid Credentials", comment: "")
+                ]
+                let udError  = NSError(domain: "UdacityDomain", code: 403, userInfo: userInfo)
+                
+                completionHandler(result: nil, error: udError)
+            } else {
+                completionHandler(result: parsedResult, error: nil)
+            }
             
             
             
         } catch let error as NSError {
             parsingError = error
-            // parsedResult = nil
+            completionHandler(result: nil, error: parsingError)
         }
         
-        if let error = parsingError {
-            //print("parsing error in json serialization")
-            completionHandler(result: nil, error: error)
-        } else {
-            completionHandler(result: parsedResult, error: nil)
-        }
     }
 
     

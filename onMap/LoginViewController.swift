@@ -42,15 +42,17 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
        
         
+        // use convenience method in onMapClient
         
         onMapClient.sharedInstance().authenticateThruUdacity(body) { JSONResult, error in
             
             if let error = error {
                 
-                                //TODO insert alert with error
+                                
                 dispatch_async(dispatch_get_main_queue()) {
-                    var errorMessage = "Failed with code"
-                    errorMessage = errorMessage + error.code.description
+                    var errorMessage = "Login Failed \n"
+                    errorMessage = errorMessage + error.localizedDescription
+                    
                     
                     let ac = UIAlertController(title: "", message: errorMessage, preferredStyle: .Alert)
                     
@@ -62,7 +64,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 }
                 
             } else {
-                
+                // authentication through Udacity succeeded. Load MapView
                 dispatch_async(dispatch_get_main_queue()) {
                     
                     

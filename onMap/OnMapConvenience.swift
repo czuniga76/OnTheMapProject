@@ -30,9 +30,9 @@ extension onMapClient {
             
             if let error = error {
                 completionHandler(result:nil, error: error)
-                print("error")
+                
             } else {
-                print("success")
+                
                 let studentLocations = (JSONResult["results"] as! NSArray) as Array
                 
                 for  dictionary in studentLocations {
@@ -100,7 +100,7 @@ extension onMapClient {
         
        
         
-        let task = onMapClient.sharedInstance().taskForPOSTMethod(url, headers: headerDic, jsonBody: infoDic, offset: 0) { JSONResult, error in
+         onMapClient.sharedInstance().taskForPOSTMethod(url, headers: headerDic, jsonBody: infoDic, offset: 0) { JSONResult, error in
             
             if let error = error {
                 
@@ -118,21 +118,21 @@ extension onMapClient {
     ///
     func authenticateThruUdacity(body: [String:AnyObject],completionHandler:(result: AnyObject!, error: NSError?) -> Void ) {
         
-         let method = "session"
+        let method = "session"
         let parameters = [String: AnyObject] ()
         let urlString = "https://www.udacity.com/api/" + method + onMapClient.escapedParameters(parameters)
       
         let headerDic = ["Accept":"application/json","Content-Type":"application/json" ]
 
-        let task = onMapClient.sharedInstance().taskForPOSTMethod(urlString, headers: headerDic, jsonBody: body,offset: 5) { JSONResult, error in
+            onMapClient.sharedInstance().taskForPOSTMethod(urlString, headers: headerDic, jsonBody: body,offset: 5) { JSONResult, error in
             
             if let error = error {
                 
                 
-                //TODO make sure completionHandler handles error
-                // completionHandler(nil,error)
+                completionHandler(result: nil, error: error)
+                
             } else {
-                print("success")
+                
                 completionHandler(result: JSONResult, error: error)
                            }
         }
