@@ -18,5 +18,12 @@ public struct StudentInformation{
     var mediaURL: String
     var updatedLast: NSDate
     
-        
+    init(dictionary: [String : AnyObject]) {
+            firstName = dictionary["firstName"] as! String
+            lastName = dictionary["lastName"] as! String
+            latitude = dictionary["latitude"] as! CLLocationDegrees
+            longitude = dictionary["longitude"] as! CLLocationDegrees
+            mediaURL = dictionary["mediaURL"] as! String
+            updatedLast = dictionary["updatedLast"] as! NSDate
+    }
 }

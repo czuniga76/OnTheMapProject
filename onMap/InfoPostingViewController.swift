@@ -14,6 +14,7 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
     @IBOutlet weak var queryLabel: UILabel!
     @IBOutlet weak var linkLabel: UITextField!
  
+    @IBOutlet weak var activityWheel: UIActivityIndicatorView!
     @IBOutlet weak var locationTextView: UITextView!
     
     
@@ -39,6 +40,9 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
         let geo = CLGeocoder()
         let annotation = MKPointAnnotation()
         
+        activityWheel.hidden = false
+        
+        activityWheel.startAnimating()
         
         geo.geocodeAddressString(loc)  {
             ( placemarks, error) in
@@ -58,6 +62,9 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
                 self.presentViewController(ac, animated: true,completion: nil)
                 
             } else if placemarks!.count > 0 {
+                self.activityWheel.stopAnimating()
+                self.activityWheel.hidden = true
+                
                 let placemark = placemarks![0]
                 let location = placemark.location
                 annotation.coordinate = location!.coordinate
@@ -156,7 +163,9 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
         submitButton.hidden = true
         submitButton.enabled = false
         linkLabel.hidden = true
+        linkLabel.clearsOnBeginEditing = true
         
+        activityWheel.hidden = true
         
         mapView.hidden = true
         

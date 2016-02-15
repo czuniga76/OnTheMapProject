@@ -66,8 +66,16 @@ extension onMapClient {
                         
                     }
                     
+                    let studentDic : [String:AnyObject] = ["firstName":first,
+                                    "lastName": last,
+                                    "latitude": lat,
+                                    "longitude": long,
+                                    "mediaURL": mediaURL,
+                                    "updatedLast": updated]
                     
-                    let student = StudentInformation(firstName: first,lastName: last, latitude: lat, longitude: long, mediaURL: mediaURL,updatedLast: updated)
+                    let student = StudentInformation(dictionary: studentDic)
+                    
+                    //let student = StudentInformation(firstName: first,lastName: last, latitude: lat, longitude: long, mediaURL: mediaURL,updatedLast: updated)
                     
                 
                     

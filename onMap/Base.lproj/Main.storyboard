@@ -168,8 +168,9 @@
                                     <outlet property="delegate" destination="khv-RY-HPz" id="75k-j7-pXz"/>
                                 </connections>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ejz-4c-naM">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="URL" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ejz-4c-naM">
                                 <rect key="frame" x="40" y="78" width="222" height="30"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -188,6 +189,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e2D-v7-hhu">
+                                <rect key="frame" x="141" y="182" width="20" height="20"/>
+                                <color key="color" red="0.19631652720568071" green="1" blue="0.43028758985921178" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQQ-Bi-hUI">
                                 <rect key="frame" x="115" y="471" width="71" height="30"/>
                                 <state key="normal" title="Submit">
@@ -222,6 +227,7 @@
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityWheel" destination="e2D-v7-hhu" id="G1N-Bj-Mk1"/>
                         <outlet property="findButton" destination="BWs-Te-p15" id="1oo-Yx-Wqz"/>
                         <outlet property="linkLabel" destination="Ejz-4c-naM" id="bFt-ar-N50"/>
                         <outlet property="locationTextView" destination="CsG-rp-GfU" id="hJj-V5-RnR"/>
