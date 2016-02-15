@@ -11,6 +11,9 @@ import MapKit
 
 
 class ViewController: UIViewController, MKMapViewDelegate {
+    @IBAction func reloadData(sender: UIBarButtonItem) {
+        getStudentLocations()
+    }
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -25,36 +28,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         getStudentLocations()
         
-         /*
-        onMapClient.sharedInstance().getParseLocationData { students, error in
-            if let students  = students {
-                
-                for student in students  {
-                    let annotation = MKPointAnnotation()
-                    
-                    // The lat and long are used to create a CLLocationCoordinates2D instance.
-                    let coordinate = CLLocationCoordinate2D(latitude: student.latitude, longitude: student.longitude)
-                    
-                    annotation.coordinate = coordinate
-                    annotation.title = "\(student.firstName) \(student.lastName)"
-                    annotation.subtitle = student.mediaURL
-                    
-                    // Finally we place the annotation in an array of annotations.
-                    self.annotations.append(annotation)
-                }
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    // update display
-                    self.mapView.addAnnotations(self.annotations)
-                    
-                }
-            }else {
-                //print(error, terminator: "")
-            }
-            
-            
-        }
-        */
+      
     }
 
     func getStudentLocations() {

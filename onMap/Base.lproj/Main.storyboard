@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -72,9 +73,22 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Item" id="4N6-sX-bC9"/>
+                        <barButtonItem title="Map" id="4N6-sX-bC9"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="P98-R9-e9g"/>
+                    <navigationItem key="navigationItem" id="P98-R9-e9g">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Reload" id="ame-th-AXL">
+                                <connections>
+                                    <action selector="reloadData:" destination="BYZ-38-t0r" id="7ao-s0-Bs7"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Add" id="nkR-2c-PRh">
+                                <connections>
+                                    <segue destination="khv-RY-HPz" kind="modal" id="73r-l9-hKA"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="VOA-Rl-ylf" id="jfJ-kL-l10"/>
@@ -83,6 +97,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2727" y="-268"/>
+        </scene>
+        <!--Info Posting View Controller-->
+        <scene sceneID="0Y1-4D-1Rd">
+            <objects>
+                <viewController id="khv-RY-HPz" customClass="InfoPostingViewController" customModule="onMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Nr-Pi-gU3"/>
+                        <viewControllerLayoutGuide type="bottom" id="twc-tV-Foo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Q4-bg-Kob">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWs-Te-p15">
+                                <rect key="frame" x="102" y="443" width="96" height="30"/>
+                                <state key="normal" title="Find On Map">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="findOnMap:" destination="khv-RY-HPz" eventType="touchUpInside" id="d1A-A2-NBc"/>
+                                </connections>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="v9L-67-e1s">
+                                <rect key="frame" x="30" y="139" width="240" height="296"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where are you studying?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZV-Zg-eS3">
+                                <rect key="frame" x="53" y="81" width="195" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CsG-rp-GfU">
+                                <rect key="frame" x="30" y="134" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ejz-4c-naM">
+                                <rect key="frame" x="102" y="78" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQQ-Bi-hUI">
+                                <rect key="frame" x="115" y="471" width="71" height="30"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitLocation:" destination="khv-RY-HPz" eventType="touchUpInside" id="wLB-1X-uoO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="findButton" destination="BWs-Te-p15" id="1oo-Yx-Wqz"/>
+                        <outlet property="linkLabel" destination="Ejz-4c-naM" id="bFt-ar-N50"/>
+                        <outlet property="locationTextView" destination="CsG-rp-GfU" id="hJj-V5-RnR"/>
+                        <outlet property="mapView" destination="v9L-67-e1s" id="2cz-wT-8oi"/>
+                        <outlet property="queryLabel" destination="AZV-Zg-eS3" id="V9R-Jj-tpM"/>
+                        <outlet property="submitButton" destination="BQQ-Bi-hUI" id="jfe-qU-uMZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k0X-Vy-UWz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3108" y="-275"/>
         </scene>
         <!--Map Table View Controller-->
         <scene sceneID="fln-Qd-ldX">
@@ -107,7 +187,20 @@
                             <outlet property="delegate" destination="rzH-sN-01q" id="QR2-9S-eKU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="CSf-5Y-Aax"/>
+                    <navigationItem key="navigationItem" id="CSf-5Y-Aax">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Reload" id="0vA-sM-l62">
+                                <connections>
+                                    <action selector="reloadData:" destination="rzH-sN-01q" id="P3D-ba-ZnT"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Add" id="cqo-lf-xIM">
+                                <connections>
+                                    <segue destination="khv-RY-HPz" kind="modal" id="PJE-Zh-3ph"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TSZ-Wh-Nt3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -170,4 +263,7 @@
             <point key="canvasLocation" x="1682" y="62"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PJE-Zh-3ph"/>
+    </inferredMetricsTieBreakers>
 </document>

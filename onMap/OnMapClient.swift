@@ -84,26 +84,25 @@ class onMapClient : NSObject {
     
     
     
-    func taskForPOSTMethod(method:String, parameters: [String : AnyObject], jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(requestURL:String, headers: [String : String], jsonBody: [String:AnyObject], offset: Int, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        let mutableParameters = parameters
-       // "https://www.udacity.com/api/"
-       // let urlString = Constants.BaseURLSecure + method + onTheMapClient.escapedParameters(mutableParameters)
-        let urlString = "https://www.udacity.com/api/" + method + onMapClient.escapedParameters(mutableParameters)
+     
         
-        let url = NSURL(string: urlString)!
+        let url = NSURL(string: requestURL)!
         let request = NSMutableURLRequest(URL: url)
         
-        // use to test directly
-        //let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
+    
         
         
         var jsonifyError: NSError? = nil
+        
         request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        
+        if (headers.count > 0) {
+            for (header, value) in headers {
+                request.addValue(value , forHTTPHeaderField: header)
+            }
+        }
         
         
         do {
@@ -122,7 +121,8 @@ class onMapClient : NSObject {
         let task = session.dataTaskWithRequest(request) {data, response, downloadError in
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
+            
+            let newData = data!.subdataWithRange(NSMakeRange(offset, data!.length - offset))
             if let error = downloadError {
                 let newError = onMapClient.errorForData(newData, response: response, error: error)
                 print ("download error")
@@ -130,6 +130,7 @@ class onMapClient : NSObject {
             } else {
                 
                 onMapClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+                print("post worked")
             }
         }
         
@@ -158,10 +159,7 @@ class onMapClient : NSObject {
         
         var parsingError: NSError? = nil
         
-        // print(data)
         
-        //let parsedResult: AnyObject?
-        //let parsedResult: NSDictionary?
         var parsedResult = [String:AnyObject]()
         do {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! Dictionary<String,AnyObject>
@@ -173,7 +171,7 @@ class onMapClient : NSObject {
             print(pkeys,pvalues)
             }
             */
-            print(parsedResult["session"]!)
+            
             
         } catch let error as NSError {
             parsingError = error

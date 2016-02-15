@@ -72,6 +72,55 @@ extension onMapClient {
         
     }
 
+    func postStudentInformation(infoDic: [String:AnyObject], completionHandler:(result: AnyObject!, error: NSError?) -> Void ) {
+        
+        let url = "https://api.parse.com/1/classes/StudentLocation"
+        
+        let headerDic = ["X-Parse-Application-Id": "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr" ,
+            "X-Parse-REST-API-Key": "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY",
+            "Content-Type":"application/json"]
+        
+       
+        
+        let task = onMapClient.sharedInstance().taskForPOSTMethod(url, headers: headerDic, jsonBody: infoDic, offset: 0) { JSONResult, error in
+            
+            if let error = error {
+                
+                completionHandler(result: nil, error: error)
+
+                
+            } else {
+                
+                completionHandler(result: JSONResult, error: error)
+            }
+        }
+        
+    }
+    
+    ///
+    func authenticateThruUdacity(body: [String:AnyObject],completionHandler:(result: AnyObject!, error: NSError?) -> Void ) {
+        
+         let method = "session"
+        let parameters = [String: AnyObject] ()
+        let urlString = "https://www.udacity.com/api/" + method + onMapClient.escapedParameters(parameters)
+      
+        let headerDic = ["Accept":"application/json","Content-Type":"application/json" ]
+
+        let task = onMapClient.sharedInstance().taskForPOSTMethod(urlString, headers: headerDic, jsonBody: body,offset: 5) { JSONResult, error in
+            
+            if let error = error {
+                
+                print("error")
+                //TODO make sure completionHandler handles error
+                // completionHandler(nil,error)
+            } else {
+                print("success")
+                completionHandler(result: JSONResult, error: error)
+                           }
+        }
+
+        
+    }
     
     
 }
