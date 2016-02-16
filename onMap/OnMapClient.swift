@@ -26,7 +26,7 @@ class onMapClient : NSObject {
         
         
         
-        let urlString = baseURL// + method
+        let urlString = baseURL + method
             
             //+ onMapClient.escapedParameters(mutableParameters)
         

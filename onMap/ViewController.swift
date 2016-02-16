@@ -86,7 +86,20 @@ class ViewController: UIViewController, MKMapViewDelegate {
                     
                 }
             }else {
-                
+                dispatch_async(dispatch_get_main_queue()) {
+                    var errorMessage = "Failed Getting Data \n"
+                    errorMessage = errorMessage + error!.localizedDescription
+                    
+                    
+                    let ac = UIAlertController(title: "", message: errorMessage, preferredStyle: .Alert)
+                    
+                    let acceptError = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    ac.addAction(acceptError)
+                    self.presentViewController(ac, animated: true,completion: nil)
+                    
+                    
+                }
+
             }
             
             

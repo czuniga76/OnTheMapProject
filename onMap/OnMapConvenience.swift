@@ -18,7 +18,7 @@ extension onMapClient {
     func getParseLocationData(completionHandler: (result: [StudentInformation]?, error: NSError?) -> Void) {
         
         
-        let mutableMethod = "session"
+        let mutableMethod = ""
         let url = "https://api.parse.com/1/classes/StudentLocation?limit=100"
         let headerDic = ["X-Parse-Application-Id": "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr" ,
             "X-Parse-REST-API-Key": "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"]
@@ -75,7 +75,7 @@ extension onMapClient {
                     
                     let student = StudentInformation(dictionary: studentDic)
                     
-                    //let student = StudentInformation(firstName: first,lastName: last, latitude: lat, longitude: long, mediaURL: mediaURL,updatedLast: updated)
+                  
                     
                 
                     
