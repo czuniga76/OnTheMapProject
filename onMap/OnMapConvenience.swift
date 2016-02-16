@@ -127,8 +127,8 @@ extension onMapClient {
     func authenticateThruUdacity(body: [String:AnyObject],completionHandler:(result: AnyObject!, error: NSError?) -> Void ) {
         
         let method = "session"
-        let parameters = [String: AnyObject] ()
-        let urlString = "https://www.udacity.com/api/" + method + onMapClient.escapedParameters(parameters)
+       // let parameters = [String: AnyObject] ()
+        let urlString = "https://www.udacity.com/api/" + method //+ onMapClient.escapedParameters(parameters)
       
         let headerDic = ["Accept":"application/json","Content-Type":"application/json" ]
 
@@ -142,8 +142,20 @@ extension onMapClient {
             } else {
                 
                 completionHandler(result: JSONResult, error: error)
-                           }
+            }
         }
+
+        
+    }
+    
+    func logoutUdacity(completionHandler: (error: NSError?) -> Void) {
+        
+        let requestString = "https://www.udacity.com/api/session"
+        
+        
+      
+        onMapClient.sharedInstance().taskForDELETEMethod(requestString, completionHandler: completionHandler)
+        
 
         
     }

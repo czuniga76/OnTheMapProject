@@ -107,13 +107,18 @@
                         <barButtonItem title="Map" id="4N6-sX-bC9"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="P98-R9-e9g">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="EQL-zH-YYn">
+                            <connections>
+                                <action selector="logoutSession:" destination="BYZ-38-t0r" id="wiq-2b-YDQ"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Reload" id="ame-th-AXL">
                                 <connections>
                                     <action selector="reloadData:" destination="BYZ-38-t0r" id="7ao-s0-Bs7"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Add" id="nkR-2c-PRh">
+                            <barButtonItem image="pin" id="nkR-2c-PRh">
                                 <connections>
                                     <segue destination="khv-RY-HPz" kind="modal" id="73r-l9-hKA"/>
                                 </connections>
@@ -127,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2727" y="-268"/>
+            <point key="canvasLocation" x="2810" y="-288"/>
         </scene>
         <!--Info Posting View Controller-->
         <scene sceneID="0Y1-4D-1Rd">
@@ -269,13 +274,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="CSf-5Y-Aax">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="hHv-fF-t0O">
+                            <connections>
+                                <action selector="logoutSession:" destination="rzH-sN-01q" id="nrI-rm-GcI"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Reload" id="0vA-sM-l62">
                                 <connections>
                                     <action selector="reloadData:" destination="rzH-sN-01q" id="P3D-ba-ZnT"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Add" id="cqo-lf-xIM">
+                            <barButtonItem image="pin" id="cqo-lf-xIM">
                                 <connections>
                                     <segue destination="khv-RY-HPz" kind="modal" id="PJE-Zh-3ph"/>
                                 </connections>
@@ -344,6 +354,9 @@
             <point key="canvasLocation" x="1682" y="62"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pin" width="32" height="32"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="73r-l9-hKA"/>
     </inferredMetricsTieBreakers>

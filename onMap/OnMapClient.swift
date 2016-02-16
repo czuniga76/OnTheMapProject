@@ -60,16 +60,9 @@ class onMapClient : NSObject {
                 }
                 catch let error as NSError {
                     parsingError = error
-                    // parsedResult = nil
+                    completionHandler(result: nil, error: parsingError)
                 }
                 
-                if let error = parsingError {
-                  
-                    
-                } else {
-                    
-                   
-                }
                 
                 
             }
@@ -144,6 +137,38 @@ class onMapClient : NSObject {
 
     }
 
+    
+    func taskForDELETEMethod(requestString:String,completionHandler: (error: NSError?) -> Void) -> Void {
+        
+         let requestURL = NSURL(string: requestString)
+         let request = NSMutableURLRequest(URL: requestURL!)
+        
+         request.HTTPMethod = "DELETE"
+         var xsrfCookie: NSHTTPCookie? = nil
+         let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+         for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+         }
+         if let xsrfCookie = xsrfCookie {
+             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+         }
+
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+        
+                completionHandler(error: error)
+           
+            
+        }
+        task.resume()
+
+    
+    }
+    
+    
+    
+    
     class func errorForData(data: NSData?, response: NSURLResponse?, error: NSError) -> NSError {
         
         if let parsedResult = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as? [String : AnyObject] {
@@ -197,7 +222,7 @@ class onMapClient : NSObject {
     }
 
     
-    
+    /*
     class func escapedParameters(parameters: [String : AnyObject]) -> String {
         
         var urlVars = [String]()
@@ -218,7 +243,8 @@ class onMapClient : NSObject {
         return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
     
-
+    */
+    
     
     class func sharedInstance() -> onMapClient {
         struct Singleton {

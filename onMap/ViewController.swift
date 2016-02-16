@@ -17,6 +17,37 @@ class ViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBAction func logoutSession(sender: UIBarButtonItem) {
+        
+        onMapClient.sharedInstance().logoutUdacity() {
+            (error: NSError?) in
+            
+            if let error = error {
+               
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    var errorMessage = "Logout Failed \n"
+                    errorMessage = errorMessage + error.localizedDescription
+                    
+                    
+                    let ac = UIAlertController(title: "", message: errorMessage, preferredStyle: .Alert)
+                    
+                    let acceptError = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    ac.addAction(acceptError)
+                    self.presentViewController(ac, animated: true,completion: nil)
+                    
+                    
+                }
+
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            }
+            
+        }
+                
+    }
     
     var annotations = [MKPointAnnotation]()
     var student: StudentInformation?
@@ -65,25 +96,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     
     
-    // WHAT DOES THIS DO?
-    /*
-    let completionHandler = { (status_code: Int?, error: NSError?) -> Void in
-        if let err = error {
-            print(err, terminator: "")
-        } else {
-            if status_code == 1 || status_code == 12 {
-                // self.isFavorite = true
-                print("success")
-                dispatch_async(dispatch_get_main_queue()) {
-                    //self.toggleFavoriteButton.tintColor = nil
-                }
-            } else {
-                print("Unexpected status code \(status_code)", terminator: "")
-            }
-        }
-    }
-
-    */
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         

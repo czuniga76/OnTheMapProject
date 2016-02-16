@@ -72,6 +72,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                     
                     controller.tabBar.items![0].title = "Map"
                     controller.tabBar.items![1].title = "List"
+                    let mapImage = UIImage(named: "map")
+                    let listImage = UIImage(named: "list")
+                    controller.tabBar.items![0].image = mapImage
+                    controller.tabBar.items![1].image = listImage
+                    
                     self.presentViewController(controller, animated: true, completion: nil)
                 }
                 

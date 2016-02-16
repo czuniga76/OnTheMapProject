@@ -14,6 +14,38 @@ class MapTableViewController: UITableViewController {
         getStudentData()
     }
     
+    @IBAction func logoutSession(sender: UIBarButtonItem) {
+       
+        onMapClient.sharedInstance().logoutUdacity() {
+            (error: NSError?) in
+            
+            if let error = error {
+               
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    var errorMessage = "Logout Failed \n"
+                    errorMessage = errorMessage + error.localizedDescription
+                    
+                    
+                    let ac = UIAlertController(title: "", message: errorMessage, preferredStyle: .Alert)
+                    
+                    let acceptError = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    ac.addAction(acceptError)
+                    self.presentViewController(ac, animated: true,completion: nil)
+                    
+                    
+                }
+
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            }
+            
+        }
+        
+        
+    }
    
     
    
