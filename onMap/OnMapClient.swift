@@ -40,6 +40,7 @@ class onMapClient : NSObject {
         }
         
         
+        
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, downloadError in
            
@@ -49,21 +50,30 @@ class onMapClient : NSObject {
 
             } else {
                 
-                var parsedResult = [String:AnyObject]()
-                var parsingError: NSError? = nil
+                let httpResponse = response as? NSHTTPURLResponse
+                    //print(httpResponse.statusCode)
+                if (httpResponse!.statusCode >= 200) && (httpResponse!.statusCode < 300) {
                 
-                do {
-                    parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! Dictionary<String,AnyObject>
+                
+                    var parsedResult = [String:AnyObject]()
+                    var parsingError: NSError? = nil
+                    //CHECK if parseJSONwithCompletionhandler can be called here
+                    do {
+                        parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! Dictionary<String,AnyObject>
                     
                     
-                    completionHandler(result: parsedResult, error: nil)
-                }
-                catch let error as NSError {
-                    parsingError = error
-                    completionHandler(result: nil, error: parsingError)
-                }
+                        completionHandler(result: parsedResult, error: nil)
+                    }
+                    catch let error as NSError {
+                        parsingError = error
+                        completionHandler(result: nil, error: parsingError)
+                    }
                 
-                
+                } else {
+                    let responseError = onMapClient.errorForHTTPResponse(urlString, response: httpResponse!)
+                    
+                    completionHandler(result: nil, error: responseError)
+                }
                 
             }
         }
@@ -111,14 +121,32 @@ class onMapClient : NSObject {
             
                 
                 if let error = downloadError {
-                   // let newError = onMapClient.errorForData(data, response: response, error: error)
+                   
                 
                     completionHandler(result: nil, error: error)
                 
                 } else {
-                    let newData = data!.subdataWithRange(NSMakeRange(offset, data!.length - offset))
-                    onMapClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
-                
+                     let httpResponse = response as? NSHTTPURLResponse
+                        
+                        if (httpResponse!.statusCode >= 200) && (httpResponse!.statusCode < 300 ) {
+                        
+                    
+                           
+                   
+                    
+                            let newData = data!.subdataWithRange(NSMakeRange(offset, data!.length - offset))
+                            onMapClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+                        } else {
+                            
+                           
+                          
+                            
+                            let responseError = onMapClient.errorForHTTPResponse(requestURL, response: httpResponse!)
+                            
+                            completionHandler(result: nil, error: responseError)
+                        }
+                    
+                   
                 }
             }
         
@@ -166,9 +194,33 @@ class onMapClient : NSObject {
     
     }
     
+    class func errorForHTTPResponse(urlString: String, response: NSHTTPURLResponse) -> NSError {
+        
+        let domainDic: [Int: String] = [403: "Invalid Username/Password"]
+        
+        var messageDescription : String
+        
+        if domainDic[response.statusCode] != nil {
+            messageDescription = domainDic[response.statusCode]!
+        } else {
+            messageDescription = NSHTTPURLResponse.localizedStringForStatusCode(response.statusCode)
+        }
+        print(response)
+        
+        let userInfo: [NSObject : AnyObject] =
+        [
+        
+        
+            NSLocalizedDescriptionKey :  NSLocalizedString("Bad Response", value: messageDescription, comment: ""),
+            NSLocalizedFailureReasonErrorKey : NSLocalizedString("Error", value: messageDescription, comment: "")
+        ]
+        let udError  = NSError(domain: urlString, code: response.statusCode, userInfo: userInfo)
+        return udError
+        
+        
+    }
     
-    
-    
+    /* unsure if needed
     class func errorForData(data: NSData?, response: NSURLResponse?, error: NSError) -> NSError {
         
         if let parsedResult = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as? [String : AnyObject] {
@@ -183,6 +235,7 @@ class onMapClient : NSObject {
         
         return error
     }
+    */
     
     class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
@@ -198,16 +251,11 @@ class onMapClient : NSObject {
             
             
             
-            if let error = parsedResult["error"] {
-                // catch error in login
-                let userInfo: [NSObject : AnyObject] =
-                [
-                    NSLocalizedDescriptionKey :  NSLocalizedString("Invalid Credentials", value: "Invalid username or password", comment: ""),
-                    NSLocalizedFailureReasonErrorKey : NSLocalizedString("Invalid", value: "Invalid Credentials", comment: "")
-                ]
-                let udError  = NSError(domain: "UdacityDomain", code: 403, userInfo: userInfo)
+            if let errorMessage = parsedResult["error"] {
                 
-                completionHandler(result: nil, error: udError)
+                let userInfo = [NSLocalizedDescriptionKey : errorMessage]
+                parsingError = NSError(domain: "OntheMap Error", code: 1, userInfo: userInfo)
+                completionHandler(result: nil, error: parsingError )
             } else {
                 completionHandler(result: parsedResult, error: nil)
             }

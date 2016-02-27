@@ -108,17 +108,14 @@ extension onMapClient {
         
        
         
+        
+        
+        
          onMapClient.sharedInstance().taskForPOSTMethod(url, headers: headerDic, jsonBody: infoDic, offset: 0) { JSONResult, error in
             
-            if let error = error {
-                
-                completionHandler(result: nil, error: error)
-
-                
-            } else {
-                
-                completionHandler(result: JSONResult, error: error)
-            }
+            
+             completionHandler(result: JSONResult, error: error)
+           
         }
         
     }
@@ -127,22 +124,16 @@ extension onMapClient {
     func authenticateThruUdacity(body: [String:AnyObject],completionHandler:(result: AnyObject!, error: NSError?) -> Void ) {
         
         let method = "session"
-       // let parameters = [String: AnyObject] ()
-        let urlString = "https://www.udacity.com/api/" + method //+ onMapClient.escapedParameters(parameters)
       
+        let urlString = "https://www.udacity.com/api/" + method
+        
         let headerDic = ["Accept":"application/json","Content-Type":"application/json" ]
 
             onMapClient.sharedInstance().taskForPOSTMethod(urlString, headers: headerDic, jsonBody: body,offset: 5) { JSONResult, error in
             
-            if let error = error {
                 
-                
-                completionHandler(result: nil, error: error)
-                
-            } else {
                 
                 completionHandler(result: JSONResult, error: error)
-            }
         }
 
         

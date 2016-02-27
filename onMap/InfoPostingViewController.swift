@@ -47,6 +47,8 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
         geo.geocodeAddressString(loc)  {
             ( placemarks, error) in
             if error != nil {
+                self.activityWheel.stopAnimating()
+                self.activityWheel.hidden = true
                 var errorMessage = ""
                 if error?.code == 8 {
                     errorMessage =  errorMessage + "Invalid Location"
