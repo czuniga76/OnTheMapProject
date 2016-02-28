@@ -84,7 +84,7 @@ class MapTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return onMapClient.sharedInstance().studentRecords.count
+        return StudentRecordsClass.sharedInstance().studentRecords.count
         
     }
     
@@ -92,7 +92,7 @@ class MapTableViewController: UITableViewController {
         
         let cell = UITableViewCell(style: .Value1, reuseIdentifier: "UITableViewCell")
         
-        let student = onMapClient.sharedInstance().studentRecords[indexPath.row]
+        let student = StudentRecordsClass.sharedInstance().studentRecords[indexPath.row]
         var name = student.firstName
         name.appendContentsOf(" ")
         name.appendContentsOf(student.lastName)

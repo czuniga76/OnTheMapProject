@@ -81,17 +81,15 @@ extension onMapClient {
                     
                    
                     
-                    onMapClient.sharedInstance().studentRecords.append(student)
+                    StudentRecordsClass.sharedInstance().studentRecords.append(student)
                 }
                 
                 // sort by most recent (found in stackoverflow questions)
                 
-                onMapClient.sharedInstance().studentRecords.sortInPlace({$0.updatedLast.compare($1.updatedLast) == .OrderedDescending })
+                StudentRecordsClass.sharedInstance().studentRecords.sortInPlace({$0.updatedLast.compare($1.updatedLast) == .OrderedDescending })
                 
-                completionHandler(result: onMapClient.sharedInstance().studentRecords, error:nil)
-                
-                
-            }
+                completionHandler(result: StudentRecordsClass.sharedInstance().studentRecords, error:nil)
+                            }
         }
         
         

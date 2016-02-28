@@ -13,7 +13,8 @@ import MapKit
 class onMapClient : NSObject {
     
     //var session: NSURLSession
-    var studentRecords = [StudentInformation]()
+    //var studentRecords = [StudentInformation]()
+    
     var annotations = [MKPointAnnotation]()
     
     override init() {
