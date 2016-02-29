@@ -12,6 +12,8 @@ class StudentRecordsClass: NSObject {
     
     var studentRecords = [StudentInformation]()
     
+   
+    
     class func sharedInstance() -> StudentRecordsClass {
         struct Singleton {
             static var sharedInstance = StudentRecordsClass()

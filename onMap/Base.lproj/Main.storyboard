@@ -194,7 +194,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e2D-v7-hhu">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e2D-v7-hhu">
                                 <rect key="frame" x="141" y="182" width="20" height="20"/>
                                 <color key="color" red="0.19631652720568071" green="1" blue="0.43028758985921178" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
@@ -211,6 +211,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="e2D-v7-hhu" firstAttribute="centerX" secondItem="CsG-rp-GfU" secondAttribute="centerX" id="1QC-vD-Wl4"/>
+                            <constraint firstItem="e2D-v7-hhu" firstAttribute="centerY" secondItem="CsG-rp-GfU" secondAttribute="centerY" id="KN5-4H-SX4"/>
                             <constraint firstItem="CsG-rp-GfU" firstAttribute="centerX" secondItem="4Q4-bg-Kob" secondAttribute="centerX" id="LEh-iI-Vq9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jqf-3x-Mzv" secondAttribute="trailing" constant="-5" id="VFz-gU-UjR"/>
                             <constraint firstItem="twc-tV-Foo" firstAttribute="top" secondItem="BQQ-Bi-hUI" secondAttribute="bottom" constant="23" id="WTG-UI-ia7"/>

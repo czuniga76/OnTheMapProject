@@ -84,6 +84,15 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
                 self.jsonDic["longitude"] = annotation.coordinate.longitude
                 self.jsonDic["mapString"] = loc
                 
+              
+                var mapRegion = MKCoordinateRegion();
+                
+                mapRegion.center = annotation.coordinate;
+                mapRegion.span.latitudeDelta = 0.2;
+                mapRegion.span.longitudeDelta = 0.2;
+                
+               
+                self.mapView.setRegion(mapRegion, animated: true)
             }
             
             

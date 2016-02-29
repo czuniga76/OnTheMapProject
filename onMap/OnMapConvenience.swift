@@ -34,6 +34,7 @@ extension onMapClient {
             } else {
                 
                 let studentLocations = (JSONResult["results"] as! NSArray) as Array
+                StudentRecordsClass.sharedInstance().studentRecords.removeAll()
                 
                 for  dictionary in studentLocations {
                     
