@@ -206,7 +206,7 @@ class onMapClient : NSObject {
         } else {
             messageDescription = NSHTTPURLResponse.localizedStringForStatusCode(response.statusCode)
         }
-        print(response)
+        
         
         let userInfo: [NSObject : AnyObject] =
         [
@@ -221,22 +221,6 @@ class onMapClient : NSObject {
         
     }
     
-    /* unsure if needed
-    class func errorForData(data: NSData?, response: NSURLResponse?, error: NSError) -> NSError {
-        
-        if let parsedResult = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as? [String : AnyObject] {
-            
-            if let errorMessage = parsedResult[onMapClient.JSONResponseKeys.StatusMessage] as? String {
-                
-                let userInfo = [NSLocalizedDescriptionKey : errorMessage]
-                
-                return NSError(domain: "OntheMap Error", code: 1, userInfo: userInfo)
-            }
-        }
-        
-        return error
-    }
-    */
     
     class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
@@ -271,30 +255,7 @@ class onMapClient : NSObject {
     }
 
     
-    /*
-    class func escapedParameters(parameters: [String : AnyObject]) -> String {
-        
-        var urlVars = [String]()
-        
-        for (key, value) in parameters {
-            
-            /* Make sure that it is a string value */
-            let stringValue = "\(value)"
-            
-            /* Escape it */
-            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            
-            /* Append it */
-            urlVars += [key + "=" + "\(escapedValue!)"]
-            
-        }
-        
-        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
-    }
-    
-    */
-    
-    
+       
     class func sharedInstance() -> onMapClient {
         struct Singleton {
             static var sharedInstance = onMapClient()
